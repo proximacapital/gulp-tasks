@@ -26,5 +26,5 @@
     },
     "files": ["index.ts", "Gulpfile.ts"],
     "include": ["Src", "Test", "Config"],
-    "exclude": []
+    "exclude": ["./node_modules/"]
 }

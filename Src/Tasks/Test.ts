@@ -1,13 +1,13 @@
-import { GetAllTestFiles, GetArgs, GetMatchingFiles, SpawnTask } from "@Src/Utils/HelperFunctions";
+import { GetAllTestFiles, MapArgs, GetMatchingFiles, SpawnTask } from "@Utils/HelperFunctions";
+import { AVA, TEST_DIR } from "@Utils/Paths";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
 import _ from "lodash";
 import path from "path";
-import { AVA, TEST_DIR } from "../Utils/Paths";
 
 export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
 {
-    const lPathArgs: string[] | undefined = GetArgs().get("path");
-    const lFileArgs: string[] | undefined = GetArgs().get("file");
+    const lPathArgs: string[] | undefined = MapArgs().get("path");
+    const lFileArgs: string[] | undefined = MapArgs().get("file");
     process.env.ENV__LOGGING_LEVEL = "OFF";
 
     let lArgs: string[] = [];

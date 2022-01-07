@@ -1,11 +1,11 @@
-import { GetArgs, GetMatchingFiles, SpawnTask } from "@Src/Utils/HelperFunctions";
+import { MapArgs, GetMatchingFiles, SpawnTask } from "@Src/Utils/HelperFunctions";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
 import * as Paths from "../Utils/Paths";
 
 export const Demo: TaskFunction = (done: TaskFunctionCallback): void =>
 {
     // get file name args
-    const lFileArgs: string[] | undefined = GetArgs().get("file");
+    const lFileArgs: string[] | undefined = MapArgs().get("file");
     if (lFileArgs === undefined || lFileArgs.length === 0)
     {
         done(new Error("ERROR: Must supply file name list via `--file fileName`"));

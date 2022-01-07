@@ -39,6 +39,10 @@ export const SpawnTask = (command: string, done: TaskFunctionCallback, args: str
         {
             done(new Error(`Task returned exit code ${code}`));
         }
+        else
+        {
+            done();
+        }
     });
 };
 
@@ -59,7 +63,7 @@ export const GetMatchingFiles = (aFileArgs: string[], aFileType: string): string
     // filter files to those matching requested arguments
     const lRegex: RegExp = new RegExp(`^.*(${aFileArgs.join("|")})\\.${aFileType}\\.js$`);
     const lMatchingFiles: string[] = [];
-    GetAllTestFiles(TEST_DIR, `.${aFileType}.js`).forEach((aFile: string) =>
+    GetAllTestFiles(TEST_DIR, `.${aFileType}.js$`).forEach((aFile: string) =>
     {
         if (lRegex.test(aFile)) { lMatchingFiles.push(aFile); }
     });
@@ -67,8 +71,9 @@ export const GetMatchingFiles = (aFileArgs: string[], aFileType: string): string
     return lMatchingFiles;
 };
 
-export const GetAllTestFiles = (aTopDirectory: string, aFilter: string = "test.js"): string[] =>
+export const GetAllTestFiles = (aTopDirectory: string, aFilter: string = "test.js$"): string[] =>
 {
+    const lFilter: RegExp = new RegExp(aFilter);
     // getTestsFromDir is called recursively until we run out of directories, this function must have access to lFiles
     // in its scope during execution. as such it is not save to move it from the getAllTestFiles scope
     const lFiles: string[] = [];
@@ -83,7 +88,7 @@ export const GetAllTestFiles = (aTopDirectory: string, aFilter: string = "test.j
             {
                 GetTestsFromDir(lFilePath);
             }
-            else if (lFileName.includes(aFilter))
+            else if (lFilter.test(lFileName))
             {
                 lFiles.push(lFilePath);
             }
@@ -103,14 +108,14 @@ export function ProcessExitCode(error: ExecException | null = null): void
     }
 }
 
-export function GetArgs(): Map<string, string[]>
+export function MapArgs(aArgs: string[] = process.argv): Map<string, string[]>
 {
-    const args: Map<string, string[]> = new Map();
+    const lMap: Map<string, string[]> = new Map();
     let inProgressArg: string | undefined = undefined;
 
-    for (let i: number = 0; i < process.argv.length; ++i)
+    for (let i: number = 0; i < aArgs.length; ++i)
     {
-        let currentArg: string = process.argv[i];
+        let currentArg: string = aArgs[i];
 
         if (currentArg[0] === "-")
         {
@@ -124,17 +129,17 @@ export function GetArgs(): Map<string, string[]>
         }
         else if (inProgressArg !== undefined)
         {
-            const lTmpArgs: string[] = args.get(inProgressArg) ?? [];
+            const lTmpArgs: string[] = lMap.get(inProgressArg) ?? [];
             lTmpArgs.push(currentArg);
-            args.set(inProgressArg, lTmpArgs);
-            inProgressArg = undefined;
+            lMap.set(inProgressArg, lTmpArgs);
+            // inProgressArg = undefined;
         }
     }
 
-    if (inProgressArg !== undefined && args.get(inProgressArg) === undefined)
+    if (inProgressArg !== undefined && lMap.get(inProgressArg) === undefined)
     {
-        args.set(inProgressArg, []);
+        lMap.set(inProgressArg, []);
     }
 
-    return args;
+    return lMap;
 }
