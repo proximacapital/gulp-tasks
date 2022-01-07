@@ -1,17 +1,17 @@
 /* eslint-disable no-console */
 import { ChildProcess, exec, ExecException, spawn } from "child_process";
-import fs from "fs";
-import GulpClient, { TaskFunctionCallback } from "gulp";
-import path from "path";
+import { readdirSync, statSync } from "fs";
+import gulp, { TaskFunctionCallback } from "gulp";
+import { join } from "path";
 import { DIST_DIR, ROOT_DIR, SRC_DIR, TEST_DIR } from "./Paths";
 
-export const RootPath = (aPath: string = ""): string => path.join(ROOT_DIR, aPath);
-export const Root = (aPath: string = ""): NodeJS.ReadWriteStream => GulpClient.src(RootPath(aPath));
+export const RootPath = (aPath: string = ""): string => join(ROOT_DIR, aPath);
+export const Root = (aPath: string = ""): NodeJS.ReadWriteStream => gulp.src(RootPath(aPath));
 
-export const DistPath = (aPath: string = ""): string => path.join(DIST_DIR, aPath);
-export const DistDest = (aPath: string = ""): NodeJS.ReadWriteStream => GulpClient.dest(DistPath(aPath));
+export const DistPath = (aPath: string = ""): string => join(DIST_DIR, aPath);
+export const DistDest = (aPath: string = ""): NodeJS.ReadWriteStream => gulp.dest(DistPath(aPath));
 
-export const SrcPath = (aPath: string = ""): string => path.join(SRC_DIR, aPath);
+export const SrcPath = (aPath: string = ""): string => join(SRC_DIR, aPath);
 
 export const SpawnTask = (command: string, done: TaskFunctionCallback, args: string[] | undefined): void =>
 {
@@ -81,12 +81,12 @@ export const GetAllTestFiles = (aTopDirectory: string, aFilter: string = "test.j
     const lFiles: string[] = [];
     function GetTestsFromDir(aDirectory: string): void
     {
-        const lDirFiles: string[] = fs.readdirSync(aDirectory);
+        const lDirFiles: string[] = readdirSync(aDirectory);
 
         for (const lFileName of lDirFiles)
         {
-            const lFilePath: string = path.join(aDirectory, lFileName);
-            if (fs.statSync(lFilePath).isDirectory() === true)
+            const lFilePath: string = join(aDirectory, lFileName);
+            if (statSync(lFilePath).isDirectory() === true)
             {
                 GetTestsFromDir(lFilePath);
             }

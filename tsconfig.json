@@ -9,6 +9,7 @@
         "inlineSourceMap": true,
         "declaration": true,
         "esModuleInterop": true,
+        "moduleResolution": "node",
         "composite": true,
         "strict": true,
         "baseUrl": ".",
@@ -23,7 +24,6 @@
             "@Test/*": ["Test/*"],
         }
     },
-    "files": ["index.ts", "Gulpfile.ts"],
-    "include": ["Src", "Test"],
+    "include": ["Src", "Test", "index.ts", "Gulpfile.ts"],
     "exclude": ["node_modules"]
 }
