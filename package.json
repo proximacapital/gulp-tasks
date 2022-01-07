@@ -1,8 +1,7 @@
 {
   "name": "@proximacapital/slurpy",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "a collection of common gulp tasks",
-  "type": "commonjs",
   "main": "./Dist/index.js",
   "scripts": {
     "build": "ttsc --build .",
