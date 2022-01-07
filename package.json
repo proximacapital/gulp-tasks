@@ -1,13 +1,18 @@
 {
   "name": "@proximacapital/slurpy",
-  "version": "0.0.1-1",
+  "version": "0.0.1-2",
   "description": "a collection of common gulp tasks",
-  "main": "./Dist/index.js",
-  "types": "./Dist/index.d.ts",
+  "main": "Dist/index",
+  "types": "Dist/index.d.ts",
+  "files": [
+    "Dist/index.js",
+    "Dist/index.d.ts",
+    "Dist/Src"
+  ],
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
     "build": "ttsc --build .",
-    "clean": "ttsc --build --clean .",
+    "clean": "rm -rf Dist",
     "test": "mocha"
   },
   "eslintConfig": {
