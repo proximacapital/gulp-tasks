@@ -21,10 +21,9 @@
             "@Tasks/*": ["Src/Tasks/*"],
             "@Utils/*": ["Src/Utils/*"],
             "@Test/*": ["Test/*"],
-            "@Root/*": ["./*"]
         }
     },
     "files": ["index.ts", "Gulpfile.ts"],
-    "include": ["Src", "Test", "Config"],
-    "exclude": ["./node_modules/"]
+    "include": ["Src", "Test"],
+    "exclude": ["node_modules"]
 }

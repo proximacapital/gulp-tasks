@@ -1,4 +1,4 @@
-import { GetAllTestFiles, GetMatchingFiles, MapArgs } from "@Root/index";
+import { GetAllTestFiles, GetMatchingFiles, MapArgs } from "@Src/Utils/HelperFunctions";
 import { TEST_DIR } from "@Src/Utils/Paths";
 import { expect } from "chai";
 
