@@ -1,0 +1,140 @@
+/* eslint-disable no-console */
+import { ChildProcess, exec, ExecException, spawn } from "child_process";
+import fs from "fs";
+import GulpClient, { TaskFunctionCallback } from "gulp";
+import path from "path";
+import { DIST_DIR, ROOT_DIR, SRC_DIR, TEST_DIR } from "./Paths";
+
+export const RootPath = (aPath: string = ""): string => path.join(ROOT_DIR, aPath);
+export const Root = (aPath: string = ""): NodeJS.ReadWriteStream => GulpClient.src(RootPath(aPath));
+
+export const DistPath = (aPath: string = ""): string => path.join(DIST_DIR, aPath);
+export const DistDest = (aPath: string = ""): NodeJS.ReadWriteStream => GulpClient.dest(DistPath(aPath));
+
+export const SrcPath = (aPath: string = ""): string => path.join(SRC_DIR, aPath);
+
+export const SpawnTask = (command: string, done: TaskFunctionCallback, args: string[] | undefined): void =>
+{
+    let lCP: ChildProcess;
+    if (args !== undefined)
+    {
+        lCP = spawn(command, args, { stdio: "inherit" });
+    }
+    else
+    {
+        lCP = spawn(command, { stdio: "inherit" });
+    }
+
+    let lError: Error | null = null;
+    lCP.on("error", (error: Error) => lError = error);
+
+    // catch non-zero exit statuses so that CI can understand when task fails
+    lCP.on("close", (code: number) =>
+    {
+        if (lError !== null)
+        {
+            done(lError);
+        }
+        else if (code !== 0)
+        {
+            done(new Error(`Task returned exit code ${code}`));
+        }
+    });
+};
+
+export const ExecTask = (command: string, done: TaskFunctionCallback): void =>
+{
+    const lCP: ChildProcess = exec(command, (error: ExecException | null, sout: string, serr: string) =>
+    {
+            serr && console.error(serr);
+            ProcessExitCode(error);
+            done(error);
+    });
+
+    if (lCP.stdout !== null) { lCP.stdout.pipe(process.stdout); }
+};
+
+export const GetMatchingFiles = (aFileArgs: string[], aFileType: string): string[] =>
+{
+    // filter files to those matching requested arguments
+    const lRegex: RegExp = new RegExp(`^.*(${aFileArgs.join("|")})\\.${aFileType}\\.js$`);
+    const lMatchingFiles: string[] = [];
+    GetAllTestFiles(TEST_DIR, `.${aFileType}.js`).forEach((aFile: string) =>
+    {
+        if (lRegex.test(aFile)) { lMatchingFiles.push(aFile); }
+    });
+
+    return lMatchingFiles;
+};
+
+export const GetAllTestFiles = (aTopDirectory: string, aFilter: string = "test.js"): string[] =>
+{
+    // getTestsFromDir is called recursively until we run out of directories, this function must have access to lFiles
+    // in its scope during execution. as such it is not save to move it from the getAllTestFiles scope
+    const lFiles: string[] = [];
+    function GetTestsFromDir(aDirectory: string): void
+    {
+        const lDirFiles: string[] = fs.readdirSync(aDirectory);
+
+        for (const lFileName of lDirFiles)
+        {
+            const lFilePath: string = path.join(aDirectory, lFileName);
+            if (fs.statSync(lFilePath).isDirectory() === true)
+            {
+                GetTestsFromDir(lFilePath);
+            }
+            else if (lFileName.includes(aFilter))
+            {
+                lFiles.push(lFilePath);
+            }
+        }
+    }
+    GetTestsFromDir(aTopDirectory);
+
+    return lFiles;
+};
+
+export function ProcessExitCode(error: ExecException | null = null): void
+{
+    if (error !== null)
+    {
+        console.error(`exec error: ${error}`);
+        process.exit(1);
+    }
+}
+
+export function GetArgs(): Map<string, string[]>
+{
+    const args: Map<string, string[]> = new Map();
+    let inProgressArg: string | undefined = undefined;
+
+    for (let i: number = 0; i < process.argv.length; ++i)
+    {
+        let currentArg: string = process.argv[i];
+
+        if (currentArg[0] === "-")
+        {
+            currentArg = currentArg.slice(1);
+            if (currentArg[0] === "-")
+            {
+                currentArg = currentArg.slice(1);
+            }
+
+            inProgressArg = currentArg;
+        }
+        else if (inProgressArg !== undefined)
+        {
+            const lTmpArgs: string[] = args.get(inProgressArg) ?? [];
+            lTmpArgs.push(currentArg);
+            args.set(inProgressArg, lTmpArgs);
+            inProgressArg = undefined;
+        }
+    }
+
+    if (inProgressArg !== undefined && args.get(inProgressArg) === undefined)
+    {
+        args.set(inProgressArg, []);
+    }
+
+    return args;
+}
