@@ -56,6 +56,8 @@ export const ExecTask = (command: string, done: TaskFunctionCallback): void =>
     });
 
     if (lCP.stdout !== null) { lCP.stdout.pipe(process.stdout); }
+
+    done();
 };
 
 export const GetMatchingFiles = (aFileArgs: string[], aFileType: string): string[] =>

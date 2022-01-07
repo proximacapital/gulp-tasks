@@ -7,8 +7,11 @@ describe("GetAllTestFiles", () =>
     it("correctly filters specified files", () =>
     {
         const lActual: string[] = GetAllTestFiles(TEST_DIR);
-        const lExpected: string[] = ["Dist/Test/Utils/HelperFunctions.test.js"];
-        expect(lActual).to.eql(lExpected);
+        const lExpected: string[] = [
+            "Dist/Test/Utils/HelperFunctions.test.js",
+            "Dist/Test/Utils/MapArgs.test.js",
+        ];
+        expect(lActual.sort()).to.eql(lExpected.sort());
     });
 
     it("gets all files when given an empty filter", () =>

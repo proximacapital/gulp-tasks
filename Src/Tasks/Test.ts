@@ -1,4 +1,4 @@
-import { GetAllTestFiles, MapArgs, GetMatchingFiles, SpawnTask } from "@Utils/HelperFunctions";
+import { GetAllTestFiles, GetMatchingFiles, MapArgs, SpawnTask } from "@Utils/HelperFunctions";
 import { AVA, TEST_DIR } from "@Utils/Paths";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
 import _ from "lodash";
