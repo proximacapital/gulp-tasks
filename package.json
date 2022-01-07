@@ -1,9 +1,11 @@
 {
   "name": "@proximacapital/slurpy",
-  "version": "0.0.1",
+  "version": "0.0.1-1",
   "description": "a collection of common gulp tasks",
   "main": "./Dist/index.js",
+  "types": "./Dist/index.d.ts",
   "scripts": {
+    "prepublishOnly": "npm run clean && npm run build",
     "build": "ttsc --build .",
     "clean": "ttsc --build --clean .",
     "test": "mocha"
