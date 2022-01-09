@@ -1,7 +1,6 @@
 import { GetAllTestFiles, GetMatchingFiles, MapArgs, SpawnTask } from "@Utils/HelperFunctions";
 import { AVA, TEST_DIR } from "@Utils/Paths";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
-import _ from "lodash";
 import path from "path";
 
 export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
@@ -13,7 +12,6 @@ export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
     let lArgs: string[] = [];
     if (lPathArgs !== undefined)
     {
-        const allDone: TaskFunctionCallback = _.after(lPathArgs.length, done);
         lPathArgs.forEach((aPath: string) =>
         {
             lArgs = lArgs.concat(GetAllTestFiles(path.join(TEST_DIR, aPath)));
