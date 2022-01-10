@@ -1,6 +1,14 @@
 {
   "name": "@proximacapital/gulp-tasks",
-  "version": "1.0.0",
+  "publishConfig": {
+    "access": "restricted",
+    "registry": "https://npm.pkg.github.com"
+  },
+  "np": {
+    "yarn": false,
+    "contents": "Dist"
+  },
+  "version": "0.1.0",
   "description": "a collection of common gulp tasks",
   "main": "Dist/index",
   "types": "Dist/index.d.ts",
@@ -71,5 +79,8 @@
     "ttypescript": "1.5.13",
     "typescript": "4.5.2",
     "typescript-transform-paths": "3.3.1"
+  },
+  "volta": {
+    "node": "16.6.1"
   }
 }
