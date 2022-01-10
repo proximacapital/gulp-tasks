@@ -4,10 +4,6 @@
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
   },
-  "np": {
-    "yarn": false,
-    "contents": "Dist"
-  },
   "version": "0.1.0",
   "description": "a collection of common gulp tasks",
   "main": "Dist/index",
