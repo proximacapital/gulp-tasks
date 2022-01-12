@@ -1,4 +1,4 @@
-import { MapArgs, GetMatchingFiles, SpawnTask } from "@Src/Utils/HelperFunctions";
+import { GetMatchingFiles, MapArgs, SpawnTask } from "@Src/Utils/HelperFunctions";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
 import * as Paths from "../Utils/Paths";
 
