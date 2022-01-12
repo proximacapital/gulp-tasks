@@ -24,6 +24,6 @@
             "@Test/*": ["Test/*"],
         }
     },
-    "include": ["Src", "Test", "index.ts", "Gulpfile.ts"],
+    "include": ["Src", "Test", "Gulpfile.ts"],
     "exclude": ["node_modules"]
 }
