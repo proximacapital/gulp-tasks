@@ -38,4 +38,4 @@ jobs:
       run: gulp lint
 
     - name: Test
-      run: gulp coverage
+      run: mocha
