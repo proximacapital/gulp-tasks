@@ -1,9 +1,6 @@
 # gulp-tasks
-~~Because "Big Gulp" is already trademarked by 7-eleven~~
 
-~~Because "slurpee" wasn't descriptive enough.~~
-
-Because naming isn't a part of our corporate culture.
+`gulp-tasks` represents a core collection of gulp tasks for Proxima's TypeScript repositories.
 
 ## Motivation
 We ought to dry up our gulpfiles, and the easiest way to do that is to create a repo that actually contains all of our common gulp tasks. If a particular application (or service) needs bespoke tasks, they can still be written inside that particular repo.
