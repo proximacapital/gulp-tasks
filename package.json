@@ -1,23 +1,31 @@
 {
-  "name": "@proximacapital/gulp-tasks",
+  "name": "@proxima-oss/gulp-tasks",
   "publishConfig": {
     "access": "restricted",
     "registry": "https://npm.pkg.github.com"
   },
-  "version": "0.1.0",
+  "version": "0.0.0",
+  "engines": {
+    "node": "^16.6.1",
+    "npm": ">=7.20.0"
+  },
   "description": "a collection of common gulp tasks",
-  "main": "Dist/index",
-  "types": "Dist/index.d.ts",
+  "main": "Dist/Src/index",
+  "types": "Dist/Src/index.d.ts",
   "files": [
-    "Dist/index.js",
-    "Dist/index.d.ts",
     "Dist/Src"
   ],
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
-    "build": "ttsc --build .",
+    "preinstall": "(! command -v gulp && echo 'WARN: MISSING GULP') || gulp check-node",
+    "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "clean": "rm -rf Dist",
-    "test": "mocha"
+    "compile": "gulp build",
+    "build": "gulp build",
+    "lint": "gulp lint",
+    "test": "mocha",
+    "coverage": "gulp coverage",
+    "start": "node Dist/Src/App.js"
   },
   "eslintConfig": {
     "extends": "@proxima-oss/eslint-config"
@@ -54,7 +62,7 @@
   },
   "homepage": "https://github.com/proximacapital/gulp-tasks#readme",
   "peerDependencies": {
-    "ava": "^4.0.0",
+    "ava": "4.0.0",
     "c8": "7.10.0",
     "del": "6.0.0",
     "gulp": "4.0.2",

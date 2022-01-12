@@ -13,7 +13,7 @@ import {
     Demo,
     ExecTask,
     Test,
-} from "./index";
+} from "./Src";
 
 gulp.task("check-node", CheckNode);
 gulp.task("clean", Clean);
