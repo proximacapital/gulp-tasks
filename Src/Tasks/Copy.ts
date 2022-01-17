@@ -6,4 +6,5 @@ export const Copy: TaskFunction = gulp.parallel(
     () => Root("tsconfig.json").pipe(DistDest()),
     () => Root(path.join("Config", "**", "*")).pipe(DistDest("Config")),
     () => Root(path.join("Config", "**", ".*")).pipe(DistDest("Config")),
+    () => Root(".nvmrc").pipe(DistDest()),
 );
