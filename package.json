@@ -24,8 +24,7 @@
     "build": "gulp build",
     "lint": "gulp lint",
     "test": "ttsc --build && mocha",
-    "coverage": "gulp coverage",
-    "start": "node Dist/Src/App.js"
+    "coverage": "gulp coverage"
   },
   "eslintConfig": {
     "extends": "@proxima-oss/eslint-config"
