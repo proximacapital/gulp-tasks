@@ -1,6 +1,6 @@
 import path from "path";
 
-export const ROOT_DIR: string = path.normalize(`${__dirname}/../../`);
+export const ROOT_DIR: string = path.normalize(process.cwd());
 export const DIST_DIR: string = path.join(ROOT_DIR, "Dist");
 export const SRC_DIR: string = path.join(ROOT_DIR, "Src");
 export const TEST_DIR: string = path.join(DIST_DIR, "Test");
