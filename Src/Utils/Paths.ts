@@ -1,14 +1,17 @@
-import finder from "find-package-json";
+import fs from "fs";
 import path from "path";
 
-// crawl up parent directories until we find the package.json of the calling software
-let lRootDir: string = process.cwd();
-for (const lPackageJson of finder())
+const DirHasGulpfile = (aDir: string): boolean => fs.readdirSync(aDir)
+    .some((aFile: string) => /^[Gg]ulpfile\.[tj]s$/.test(path.basename(aFile)));
+
+// crawl up parent directories until we find the gulpfile of the calling software
+let lGulpDir: string = process.cwd();
+while (DirHasGulpfile(lGulpDir) === false)
 {
-    lRootDir = path.dirname(lPackageJson.__path);
+    lGulpDir = path.dirname(lGulpDir);
 }
 
-export const ROOT_DIR: string = path.normalize(lRootDir);
+export const ROOT_DIR: string = path.normalize(lGulpDir);
 export const DIST_DIR: string = path.join(ROOT_DIR, "Dist");
 export const SRC_DIR: string = path.join(ROOT_DIR, "Src");
 export const TEST_DIR: string = path.join(DIST_DIR, "Test");
