@@ -1,6 +1,14 @@
+import finder from "find-package-json";
 import path from "path";
 
-export const ROOT_DIR: string = path.normalize(process.cwd());
+// crawl up parent directories until we find the package.json of the calling software
+let lRootDir: string = process.cwd();
+for (const lPackageJson of finder())
+{
+    lRootDir = path.dirname(lPackageJson.__path);
+}
+
+export const ROOT_DIR: string = path.normalize(lRootDir);
 export const DIST_DIR: string = path.join(ROOT_DIR, "Dist");
 export const SRC_DIR: string = path.join(ROOT_DIR, "Src");
 export const TEST_DIR: string = path.join(DIST_DIR, "Test");
