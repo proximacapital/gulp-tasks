@@ -7,14 +7,14 @@ suite("GetAllTestFiles");
 
 test("correctly filters specified files", function()
 {
-    const lActual: string[] = GetAllTestFiles(TEST_DIR);
+    const lActual: string[] = GetAllTestFiles(TEST_DIR).sort();
     const lExpected: string[] = [
         "Utils/MapArgs.test.js",
     ]
         .map((aPath: string) => path.join(TEST_DIR, aPath))
         .sort();
 
-    expect(lActual.sort()).to.eql(lExpected.sort());
+    expect(lActual).to.eql(lExpected);
 });
 
 test("gets all files when given an empty filter", function()
@@ -23,6 +23,8 @@ test("gets all files when given an empty filter", function()
     const lExpected: string[] = [
         "TestFile.demo.d.ts",
         "TestFile.demo.js",
+        "Utils/GetGulpFileDir.spec.d.ts",
+        "Utils/GetGulpFileDir.spec.js",
         "Utils/HelperFunctions.spec.d.ts",
         "Utils/HelperFunctions.spec.js",
         "Utils/MapArgs.test.d.ts",
