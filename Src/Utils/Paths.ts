@@ -1,17 +1,26 @@
 import fs from "fs";
 import path from "path";
 
-const DirHasGulpfile = (aDir: string): boolean => fs.readdirSync(aDir)
-    .some((aFile: string) => /^[Gg]ulpfile\.[tj]s$/.test(path.basename(aFile)));
-
-// crawl up parent directories until we find the gulpfile of the calling software
-let lGulpDir: string = process.cwd();
-while (DirHasGulpfile(lGulpDir) === false)
+export function FindGulpFileDir(aStartingDir: string = process.cwd()): string
 {
-    lGulpDir = path.dirname(lGulpDir);
+    const DirHasGulpfile = (aDir: string): boolean => (
+        fs.existsSync(path.join(aDir, "Gulpfile.ts"))
+     || fs.existsSync(path.join(aDir, "Gulpfile.js"))
+     || fs.existsSync(path.join(aDir, "gulpfile.ts"))
+     || fs.existsSync(path.join(aDir, "gulpfile.js"))
+    );
+
+    // check directory & parents until we find a valid gulpfile
+    let lGulpDir: string = aStartingDir;
+    while (DirHasGulpfile(lGulpDir) === false)
+    {
+        lGulpDir = path.dirname(lGulpDir);
+    }
+
+    return path.normalize(lGulpDir);
 }
 
-export const ROOT_DIR: string = path.normalize(lGulpDir);
+export const ROOT_DIR: string = FindGulpFileDir();
 export const DIST_DIR: string = path.join(ROOT_DIR, "Dist");
 export const SRC_DIR: string = path.join(ROOT_DIR, "Src");
 export const TEST_DIR: string = path.join(DIST_DIR, "Test");
