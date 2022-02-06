@@ -10,7 +10,7 @@
     "npm": ">=7.20.0"
   },
   "description": "a collection of common gulp tasks",
-  "main": "Src/index",
+  "main": "Dist/Src/index.js",
   "files": [
     "Dist/Src"
   ],
