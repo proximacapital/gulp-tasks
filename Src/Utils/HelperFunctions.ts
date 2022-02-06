@@ -65,7 +65,7 @@ export const GetMatchingFiles = (aFileArgs: string[], aFileType: string): string
     // filter files to those matching requested arguments
     const lRegex: RegExp = new RegExp(`^.*(${aFileArgs.join("|")})\\.${aFileType}\\.js$`);
     const lMatchingFiles: string[] = [];
-    GetAllTestFiles(Paths.Test, `.${aFileType}.js$`).forEach((aFile: string) =>
+    GetAllTestFiles(Paths.TestDist, `.${aFileType}.js$`).forEach((aFile: string) =>
     {
         if (lRegex.test(aFile)) { lMatchingFiles.push(aFile); }
     });

@@ -14,7 +14,7 @@ export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
     {
         lPathArgs.forEach((aPath: string) =>
         {
-            lArgs = lArgs.concat(GetAllTestFiles(path.join(Paths.Test, aPath)));
+            lArgs = lArgs.concat(GetAllTestFiles(path.join(Paths.TestDist, aPath)));
         });
         lArgs.push("--match");
     }
@@ -31,7 +31,7 @@ export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
     }
     else
     {
-        lArgs = [...GetAllTestFiles(Paths.Test)];
+        lArgs = [...GetAllTestFiles(Paths.TestDist)];
     }
 
     lArgs.push("--verbose");

@@ -1,6 +1,5 @@
 import path from "path";
 
-
 let lRootDir: string | undefined;
 /**
  * SetRoot will set the root for all relative paths in your project. this is
@@ -43,8 +42,9 @@ export class Paths
     }
 
     public static get Src(): string     { return path.join(this.Root, "Src"); }
-    public static get Test(): string    { return path.join(this.Root, "Test"); }
+    public static get Test(): string     { return path.join(this.Root, "Test"); }
     public static get Dist(): string    { return path.join(this.Root, "Dist"); }
+    public static get TestDist(): string    { return path.join(this.Dist, "Test"); }
     public static get NodeBin(): string { return path.join(this.Root, "node_modules", ".bin"); }
 
     public static get AVA(): string     { return Paths.BinPath("ava"); }

@@ -1,3 +1,6 @@
+import { SetRoot } from "@Src/SetPath";
+SetRoot(process.cwd());
+
 import { GetAllTestFiles, GetMatchingFiles, MapArgs } from "@Utils/HelperFunctions";
 import { Paths } from "@Utils/Paths";
 import { expect } from "chai";
@@ -7,11 +10,9 @@ suite("GetAllTestFiles");
 
 test("correctly filters specified files", function()
 {
-    const lActual: string[] = GetAllTestFiles(Paths.Test);
-    const lExpected: string[] = [
-        "Utils/MapArgs.test.js",
-    ]
-        .map((aPath: string) => path.join(Paths.Test, aPath))
+    const lActual: string[] = GetAllTestFiles(Paths.TestDist);
+    const lExpected: string[] = ["Utils/MapArgs.test.js"]
+        .map((aPath: string) => path.join(Paths.TestDist, aPath))
         .sort();
 
     expect(lActual.sort()).to.eql(lExpected.sort());
@@ -19,7 +20,7 @@ test("correctly filters specified files", function()
 
 test("gets all files when given an empty filter", function()
 {
-    const lActual: string[] = GetAllTestFiles(Paths.Test, ".$").sort();
+    const lActual: string[] = GetAllTestFiles(Paths.TestDist, ".$").sort();
     const lExpected: string[] = [
         "TestFile.demo.d.ts",
         "TestFile.demo.js",
@@ -28,7 +29,7 @@ test("gets all files when given an empty filter", function()
         "Utils/MapArgs.test.d.ts",
         "Utils/MapArgs.test.js",
     ]
-        .map((aPath: string) => path.join(Paths.Test, aPath))
+        .map((aPath: string) => path.join(Paths.TestDist, aPath))
         .sort();
     expect(lActual).to.eql(lExpected);
 });
@@ -39,7 +40,7 @@ suite("GetMatchingFiles");
 test("finds demo file", function()
 {
     const lActual: string[] = GetMatchingFiles(["TestFile"], "demo");
-    const lExpected: string[] = [path.join(Paths.Test, "TestFile.demo.js")];
+    const lExpected: string[] = [path.join(Paths.TestDist, "TestFile.demo.js")];
     expect(lActual).to.eql(lExpected);
 });
 

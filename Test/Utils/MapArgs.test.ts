@@ -1,3 +1,6 @@
+import { SetRoot } from "@Src/SetPath";
+SetRoot(__dirname);
+
 import { MapArgs } from "@Utils/HelperFunctions";
 import test, { ExecutionContext } from "ava";
 
