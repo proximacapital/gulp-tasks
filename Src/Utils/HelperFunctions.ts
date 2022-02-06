@@ -3,15 +3,15 @@ import { ChildProcess, exec, ExecException, spawn } from "child_process";
 import { readdirSync, statSync } from "fs";
 import gulp, { TaskFunctionCallback } from "gulp";
 import { join } from "path";
-import { Path } from "./Paths";
+import { Paths } from "./Paths";
 
-export const RootPath = (aPath: string = ""): string => join(Path.Root, aPath);
+export const RootPath = (aPath: string = ""): string => join(Paths.Root, aPath);
 export const Root = (aPath: string = ""): NodeJS.ReadWriteStream => gulp.src(RootPath(aPath));
 
-export const DistPath = (aPath: string = ""): string => join(Path.Dist, aPath);
+export const DistPath = (aPath: string = ""): string => join(Paths.Dist, aPath);
 export const DistDest = (aPath: string = ""): NodeJS.ReadWriteStream => gulp.dest(DistPath(aPath));
 
-export const SrcPath = (aPath: string = ""): string => join(Path.Src, aPath);
+export const SrcPath = (aPath: string = ""): string => join(Paths.Src, aPath);
 
 export const SpawnTask = (command: string, done: TaskFunctionCallback, args: string[] | undefined): void =>
 {
@@ -65,7 +65,7 @@ export const GetMatchingFiles = (aFileArgs: string[], aFileType: string): string
     // filter files to those matching requested arguments
     const lRegex: RegExp = new RegExp(`^.*(${aFileArgs.join("|")})\\.${aFileType}\\.js$`);
     const lMatchingFiles: string[] = [];
-    GetAllTestFiles(Path.Test, `.${aFileType}.js$`).forEach((aFile: string) =>
+    GetAllTestFiles(Paths.Test, `.${aFileType}.js$`).forEach((aFile: string) =>
     {
         if (lRegex.test(aFile)) { lMatchingFiles.push(aFile); }
     });

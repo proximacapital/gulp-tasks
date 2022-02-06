@@ -1,5 +1,5 @@
 import { GetMatchingFiles, MapArgs, SpawnTask } from "@Utils/HelperFunctions";
-import { Path } from "@Utils/Paths";
+import { Paths } from "@Utils/Paths";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
 
 export const Demo: TaskFunction = (done: TaskFunctionCallback): void =>
@@ -22,5 +22,5 @@ export const Demo: TaskFunction = (done: TaskFunctionCallback): void =>
 
     // run demos
     lMatchingFiles.unshift("--fail-fast");
-    SpawnTask(Path.AVA, done, lMatchingFiles);
+    SpawnTask(Paths.AVA, done, lMatchingFiles);
 };

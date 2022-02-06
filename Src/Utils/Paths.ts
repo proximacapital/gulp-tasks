@@ -28,7 +28,7 @@ export function SetRoot(aRootDir: string): void
     lRootDir = aRootDir;
 }
 
-export class Path
+export class Paths
 {
     public static get Root(): string
     {
@@ -47,10 +47,10 @@ export class Path
     public static get Dist(): string    { return path.join(this.Root, "Dist"); }
     public static get NodeBin(): string { return path.join(this.Root, "node_modules", ".bin"); }
 
-    public static get AVA(): string     { return Path.BinPath("ava"); }
-    public static get TSC(): string     { return Path.BinPath("ttsc"); }
-    public static get ESLINT(): string  { return Path.BinPath("eslint"); }
-    public static get MDLINT(): string  { return Path.BinPath("markdownlint"); }
-    public static get C8(): string      { return Path.BinPath("c8"); }
+    public static get AVA(): string     { return Paths.BinPath("ava"); }
+    public static get TSC(): string     { return Paths.BinPath("ttsc"); }
+    public static get ESLINT(): string  { return Paths.BinPath("eslint"); }
+    public static get MDLINT(): string  { return Paths.BinPath("markdownlint"); }
+    public static get C8(): string      { return Paths.BinPath("c8"); }
 }
 

@@ -1,5 +1,5 @@
 import { GetAllTestFiles, GetMatchingFiles, MapArgs, SpawnTask } from "@Utils/HelperFunctions";
-import { Path } from "@Utils/Paths";
+import { Paths } from "@Utils/Paths";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
 import path from "path";
 
@@ -14,7 +14,7 @@ export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
     {
         lPathArgs.forEach((aPath: string) =>
         {
-            lArgs = lArgs.concat(GetAllTestFiles(path.join(Path.Test, aPath)));
+            lArgs = lArgs.concat(GetAllTestFiles(path.join(Paths.Test, aPath)));
         });
         lArgs.push("--match");
     }
@@ -31,10 +31,10 @@ export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
     }
     else
     {
-        lArgs = [...GetAllTestFiles(Path.Test)];
+        lArgs = [...GetAllTestFiles(Paths.Test)];
     }
 
     lArgs.push("--verbose");
 
-    SpawnTask(Path.AVA, done, lArgs);
+    SpawnTask(Paths.AVA, done, lArgs);
 };

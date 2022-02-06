@@ -1,10 +1,10 @@
 import { ExecTask } from "@Utils/HelperFunctions";
-import { Path } from "@Utils/Paths";
+import { Paths } from "@Utils/Paths";
 import GulpClient, { TaskFunction, TaskFunctionCallback } from "gulp";
 
 const lLinters: Map<string, string> = new Map([
-    ["eslint", Path.ESLINT],
-    ["mdlint", Path.ESLINT],
+    ["eslint", Paths.ESLINT],
+    ["mdlint", Paths.ESLINT],
 ]);
 
 function LintFactory(aLinter: string, aFix: boolean): TaskFunction
