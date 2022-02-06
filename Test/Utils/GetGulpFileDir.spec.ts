@@ -13,8 +13,6 @@ test("Correct when given no input", function()
 const lFilters: string[] = [
     "Gulpfile.ts",
     "Gulpfile.js",
-    "gulpfile.ts",
-    "gulpfile.js",
 ];
 
 function TestFileFilter(aFileName: string): void
