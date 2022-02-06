@@ -1,15 +1,56 @@
 import path from "path";
 
-export const ROOT_DIR: string = path.normalize(`${__dirname}/../../`);
-export const DIST_DIR: string = path.join(ROOT_DIR, "Dist");
-export const SRC_DIR: string = path.join(ROOT_DIR, "Src");
-export const TEST_DIR: string = path.join(DIST_DIR, "Test");
-export const NODE_BIN_DIR: string = path.join(ROOT_DIR, "node_modules", ".bin");
 
-const BinPath = (aCommand: string): string => path.join(NODE_BIN_DIR, aCommand);
+let lRootDir: string | undefined;
+/**
+ * SetRoot will set the root for all relative paths in your project. this is
+ * rqeuired because all of the tasks in `gulp-tasks` that work with standardized
+ * paths will need to know where the root they are starting from is.
+ *
+ * It is required to SetRoot as the first step in any Gulpfile that inherits
+ * `gulp-tasks`.
+ *
+ * @param aRootDir - the root of your project, where you Gulpfile is located
+ * @throws if any other exports are used prior to calling SetRoot
+ *
+ * @example
+ * Intended Usage inside Gulpfile.ts:
+ * ```
+ * import { SetRoot } from "@proxima-oss/gulp-tasks";
+ * SetRoot(\_\_dirname);
+ *
+ * // imports...
+ * // task declarations...
+ * ```
+**/
+export function SetRoot(aRootDir: string): void
+{
+    lRootDir = aRootDir;
+}
 
-export const AVA: string = BinPath("ava");
-export const TSC: string = BinPath("ttsc");
-export const ESLINT: string = BinPath("eslint");
-export const MDLINT: string = BinPath("markdownlint");
-export const C8: string = BinPath("c8");
+export class Path
+{
+    public static get Root(): string
+    {
+        if (lRootDir === undefined) { throw new Error("please call Setup prior to running tasks"); }
+
+        return lRootDir;
+    }
+
+    private static BinPath(aCommand: string): string
+    {
+        return path.join(this.NodeBin, aCommand);
+    }
+
+    public static get Src(): string     { return path.join(this.Root, "Src"); }
+    public static get Test(): string    { return path.join(this.Root, "Test"); }
+    public static get Dist(): string    { return path.join(this.Root, "Dist"); }
+    public static get NodeBin(): string { return path.join(this.Root, "node_modules", ".bin"); }
+
+    public static get AVA(): string     { return Path.BinPath("ava"); }
+    public static get TSC(): string     { return Path.BinPath("ttsc"); }
+    public static get ESLINT(): string  { return Path.BinPath("eslint"); }
+    public static get MDLINT(): string  { return Path.BinPath("markdownlint"); }
+    public static get C8(): string      { return Path.BinPath("c8"); }
+}
+

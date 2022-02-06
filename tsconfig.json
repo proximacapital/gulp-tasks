@@ -18,10 +18,10 @@
             { "transform": "typescript-transform-paths", "afterDeclarations": true }
         ],
         "paths": {
-            "@Src/*": ["Src/*"],
             "@Tasks/*": ["Src/Tasks/*"],
             "@Utils/*": ["Src/Utils/*"],
             "@Test/*": ["Test/*"],
+            "@Src/*": ["Src/*"],
         }
     },
     "include": ["Src", "Test", "Gulpfile.ts"],

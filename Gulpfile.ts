@@ -1,3 +1,8 @@
+// import & set root prior to importing other modules that may attempt to read
+// the root
+import { SetRoot } from "@Utils/Paths";
+SetRoot(__dirname);
+
 import {
     Build,
     BuildCheckTest,

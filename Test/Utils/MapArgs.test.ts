@@ -1,4 +1,4 @@
-import { MapArgs } from "@Src/Utils/HelperFunctions";
+import { MapArgs } from "@Utils/HelperFunctions";
 import test, { ExecutionContext } from "ava";
 
 test("MapArgs collects values correctly", (t: ExecutionContext) =>

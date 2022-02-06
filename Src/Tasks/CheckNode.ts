@@ -1,4 +1,4 @@
-import { RootPath } from "@Src/Utils/HelperFunctions";
+import { RootPath } from "@Utils/HelperFunctions";
 import fs from "fs";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
 

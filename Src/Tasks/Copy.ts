@@ -1,4 +1,4 @@
-import { DistDest, Root } from "@Src/Utils/HelperFunctions";
+import { DistDest, Root } from "@Utils/HelperFunctions";
 import gulp, { TaskFunction } from "gulp";
 import path from "path";
 

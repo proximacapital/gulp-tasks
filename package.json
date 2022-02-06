@@ -10,14 +10,12 @@
     "npm": ">=7.20.0"
   },
   "description": "a collection of common gulp tasks",
-  "main": "Dist/Src/index",
-  "types": "Dist/Src/index.d.ts",
+  "main": "Src/index",
   "files": [
     "Dist/Src"
   ],
   "scripts": {
-    "prepublishOnly": "npm run clean && npm run build",
-    "prepare": "(! command -v gulp && echo 'WARN: MISSING GULP') || gulp check-node",
+    "prepare": "npm run build",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "clean": "rm -rf Dist",
     "compile": "gulp build",

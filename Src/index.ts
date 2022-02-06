@@ -7,4 +7,5 @@ export { Copy } from "@Tasks/Copy";
 export { Clean } from "@Tasks/Clean";
 export { Compile } from "@Tasks/Compile";
 export * from "@Utils/HelperFunctions";
+export { SetRoot } from "@Utils/Paths";
 export { ESLintCheck, ESLintFix, Lint, LintFix, MDLintCheck, MDLintFix } from "@Tasks/Lint";
