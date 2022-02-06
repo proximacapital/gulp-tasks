@@ -1,15 +1,35 @@
+import fs from "fs";
 import path from "path";
 
-export const ROOT_DIR: string = path.normalize(`${__dirname}/../../`);
-export const DIST_DIR: string = path.join(ROOT_DIR, "Dist");
-export const SRC_DIR: string = path.join(ROOT_DIR, "Src");
-export const TEST_DIR: string = path.join(DIST_DIR, "Test");
-export const NODE_BIN_DIR: string = path.join(ROOT_DIR, "node_modules", ".bin");
+function DirHasGulpfile(aDir: string): boolean
+{
+    return (
+           fs.existsSync(path.join(aDir, "Gulpfile.ts"))
+        || fs.existsSync(path.join(aDir, "Gulpfile.js"))
+    );
+}
 
-const BinPath = (aCommand: string): string => path.join(NODE_BIN_DIR, aCommand);
+export function FindGulpFileDir(aStartingDir: string = process.cwd()): string
+{
 
-export const AVA: string = BinPath("ava");
-export const TSC: string = BinPath("ttsc");
-export const ESLINT: string = BinPath("eslint");
-export const MDLINT: string = BinPath("markdownlint");
-export const C8: string = BinPath("c8");
+    // check directory & parents until we find a valid gulpfile
+    let lGulpDir: string = aStartingDir;
+    while (DirHasGulpfile(lGulpDir) === false)
+    {
+        lGulpDir = path.dirname(lGulpDir);
+    }
+
+    return path.normalize(lGulpDir);
+}
+
+export const ROOT_DIR: string      = FindGulpFileDir();
+export const SRC_DIR: string       = path.join(ROOT_DIR, "Src");
+export const DIST_DIR: string      = path.join(ROOT_DIR, "Dist");
+export const TEST_DIST_DIR: string = path.join(DIST_DIR, "Test");
+export const NODE_BIN_DIR: string  = path.join(ROOT_DIR, "node_modules", ".bin");
+
+export const AVA: string    = path.join(NODE_BIN_DIR, "ava");
+export const TSC: string    = path.join(NODE_BIN_DIR, "ttsc");
+export const ESLINT: string = path.join(NODE_BIN_DIR, "eslint");
+export const MDLINT: string = path.join(NODE_BIN_DIR, "markdownlint");
+export const C8: string     = path.join(NODE_BIN_DIR, "c8");

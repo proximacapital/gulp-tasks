@@ -3,7 +3,7 @@ import { ChildProcess, exec, ExecException, spawn } from "child_process";
 import { readdirSync, statSync } from "fs";
 import gulp, { TaskFunctionCallback } from "gulp";
 import { join } from "path";
-import { DIST_DIR, ROOT_DIR, SRC_DIR, TEST_DIR } from "./Paths";
+import { DIST_DIR, ROOT_DIR, SRC_DIR, TEST_DIST_DIR } from "./Paths";
 
 export const RootPath = (aPath: string = ""): string => join(ROOT_DIR, aPath);
 export const Root = (aPath: string = ""): NodeJS.ReadWriteStream => gulp.src(RootPath(aPath));
@@ -65,7 +65,7 @@ export const GetMatchingFiles = (aFileArgs: string[], aFileType: string): string
     // filter files to those matching requested arguments
     const lRegex: RegExp = new RegExp(`^.*(${aFileArgs.join("|")})\\.${aFileType}\\.js$`);
     const lMatchingFiles: string[] = [];
-    GetAllTestFiles(TEST_DIR, `.${aFileType}.js$`).forEach((aFile: string) =>
+    GetAllTestFiles(TEST_DIST_DIR, `.${aFileType}.js$`).forEach((aFile: string) =>
     {
         if (lRegex.test(aFile)) { lMatchingFiles.push(aFile); }
     });

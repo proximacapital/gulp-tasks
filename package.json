@@ -17,15 +17,14 @@
   ],
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
-    "prepare": "(! command -v gulp && echo 'WARN: MISSING GULP') || gulp check-node",
+    "preinstall": "(! command -v gulp && echo 'WARN: MISSING GULP') || gulp check-node",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "clean": "rm -rf Dist",
-    "compile": "gulp build",
+    "compile": "npm run build",
     "build": "gulp build",
     "lint": "gulp lint",
     "test": "ttsc --build && mocha",
-    "coverage": "gulp coverage",
-    "start": "node Dist/Src/App.js"
+    "coverage": "gulp coverage"
   },
   "eslintConfig": {
     "extends": "@proxima-oss/eslint-config"
@@ -55,8 +54,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/proximacapital/gulp-tasks.git"
   },
-  "author": "Developus Maximis <dev@proxima.capital>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/proximacapital/gulp-tasks/issues"
   },
