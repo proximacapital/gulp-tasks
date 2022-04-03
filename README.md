@@ -23,3 +23,11 @@ configuring `ts-node` and `tsconfig-paths` allows for Gulp to transpile
 `Gulpfile.ts` with zero issues.
 
 This repo also demonstrates the use of `Mocha` & `Chai`.
+
+## Contributing
+
+NPM releases are published automatically via a github workflow (read: whenever anyone publishes a github release). So, the easiest way to prepare this package for publication is via `np`:
+```bash
+np --no-publish --branch prod
+```
+This will draft a github release for you to fill in and then publish, triggering the workflow.
