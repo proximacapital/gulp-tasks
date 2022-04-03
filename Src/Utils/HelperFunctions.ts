@@ -1,28 +1,25 @@
 /* eslint-disable no-console */
-import { ChildProcess, exec, ExecException, spawn } from "child_process";
-import { readdirSync, statSync } from "fs";
-import gulp, { TaskFunctionCallback } from "gulp";
+/// <reference types="node" />
+import * as cp from "child_process";
+import * as fs from "fs";
+import * as gulp from "gulp";
 import { join } from "path";
 import { DIST_DIR, ROOT_DIR, SRC_DIR, TEST_DIST_DIR } from "./Paths";
 
 export const RootPath = (aPath: string = ""): string => join(ROOT_DIR, aPath);
-export const Root = (aPath: string = ""): NodeJS.ReadWriteStream => gulp.src(RootPath(aPath));
-
 export const DistPath = (aPath: string = ""): string => join(DIST_DIR, aPath);
-export const DistDest = (aPath: string = ""): NodeJS.ReadWriteStream => gulp.dest(DistPath(aPath));
-
 export const SrcPath = (aPath: string = ""): string => join(SRC_DIR, aPath);
 
-export const SpawnTask = (command: string, done: TaskFunctionCallback, args: string[] | undefined): void =>
+export const SpawnTask = (command: string, done: gulp.TaskFunctionCallback, args: string[] | undefined): void =>
 {
-    let lCP: ChildProcess;
+    let lCP: cp.ChildProcess;
     if (args !== undefined)
     {
-        lCP = spawn(command, args, { stdio: "inherit" });
+        lCP = cp.spawn(command, args, { stdio: "inherit" });
     }
     else
     {
-        lCP = spawn(command, { stdio: "inherit" });
+        lCP = cp.spawn(command, { stdio: "inherit" });
     }
 
     let lError: Error | null = null;
@@ -46,9 +43,9 @@ export const SpawnTask = (command: string, done: TaskFunctionCallback, args: str
     });
 };
 
-export const ExecTask = (command: string, done: TaskFunctionCallback): void =>
+export const ExecTask = (command: string, done: gulp.TaskFunctionCallback): void =>
 {
-    const lCP: ChildProcess = exec(command, (error: ExecException | null, sout: string, serr: string) =>
+    const lCP: cp.ChildProcess = cp.exec(command, (error: cp.ExecException | null, sout: string, serr: string) =>
     {
             serr && console.error(serr);
             ProcessExitCode(error);
@@ -81,12 +78,12 @@ export const GetAllTestFiles = (aTopDirectory: string, aFilter: string = "test.j
     const lFiles: string[] = [];
     function GetTestsFromDir(aDirectory: string): void
     {
-        const lDirFiles: string[] = readdirSync(aDirectory);
+        const lDirFiles: string[] = fs.readdirSync(aDirectory);
 
         for (const lFileName of lDirFiles)
         {
             const lFilePath: string = join(aDirectory, lFileName);
-            if (statSync(lFilePath).isDirectory() === true)
+            if (fs.statSync(lFilePath).isDirectory() === true)
             {
                 GetTestsFromDir(lFilePath);
             }
@@ -101,7 +98,7 @@ export const GetAllTestFiles = (aTopDirectory: string, aFilter: string = "test.j
     return lFiles;
 };
 
-export function ProcessExitCode(error: ExecException | null = null): void
+export function ProcessExitCode(error: cp.ExecException | null = null): void
 {
     if (error !== null)
     {

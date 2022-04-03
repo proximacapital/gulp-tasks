@@ -35,7 +35,6 @@ test("gets all files when given an empty filter", function()
     expect(lActual).to.eql(lExpected);
 });
 
-
 suite("GetMatchingFiles");
 
 test("finds demo file", function()
