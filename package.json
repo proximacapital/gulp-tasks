@@ -13,12 +13,10 @@
   "main": "Dist/Src/index",
   "types": "Dist/Src/index.d.ts",
   "files": [
-    "Dist/Src",
-    "Scripts/"
+    "Dist/Src"
   ],
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
-    "preinstall": "./Scripts/check-node",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "clean": "rm -rf Dist",
     "compile": "npm run build",
