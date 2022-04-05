@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-/// <reference types="node" />
 import * as cp from "child_process";
 import * as fs from "fs";
 import * as gulp from "gulp";
