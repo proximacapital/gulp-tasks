@@ -25,6 +25,6 @@
             "@Test/*": ["Test/*"],
         }
     },
-    "include": ["Src", "Test", "Gulpfile.ts", "check-node.js"],
+    "include": ["Src", "Test", "Gulpfile.ts", "Scripts"],
     "exclude": ["node_modules"]
 }

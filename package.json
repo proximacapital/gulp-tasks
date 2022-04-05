@@ -14,11 +14,11 @@
   "types": "Dist/Src/index.d.ts",
   "files": [
     "Dist/Src",
-    "check-node.js"
+    "Scripts/"
   ],
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
-    "preinstall": "./check-node.js",
+    "preinstall": "./Scripts/check-node",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "clean": "rm -rf Dist",
     "compile": "npm run build",

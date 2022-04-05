@@ -1,12 +1,12 @@
 #!/usr/bin/env node
+
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/typedef */
-
-const fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import { RootPath } from "..";
 
 const lActualVersion = process.versions.node.trim();
-const lExpectedVersion = fs.readFileSync(path.join(__dirname, ".nvmrc")).toString().trim();
+const lExpectedVersion = fs.readFileSync(RootPath(".nvmrc")).toString().trim();
 
 if (lActualVersion !== lExpectedVersion)
 {
