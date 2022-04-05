@@ -13,7 +13,8 @@
   "main": "Dist/Src/index",
   "types": "Dist/Src/index.d.ts",
   "files": [
-    "Dist/Src"
+    "Dist/Src",
+    "check-node.js"
   ],
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
