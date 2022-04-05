@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "prepublishOnly": "npm run clean && npm run build",
-    "preinstall": "(! command -v gulp && echo 'WARN: MISSING GULP') || gulp check-node",
+    "preinstall": "./check-node.js",
     "reinstall": "rm -rf node_modules package-lock.json && npm install",
     "clean": "rm -rf Dist",
     "compile": "npm run build",
