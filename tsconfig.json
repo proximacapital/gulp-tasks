@@ -6,6 +6,7 @@
         "target": "ESNEXT",
         "module": "commonjs",
         "outDir": "./Dist",
+        "allowJs": true,
         "inlineSourceMap": true,
         "declaration": true,
         "esModuleInterop": true,
@@ -24,6 +25,6 @@
             "@Test/*": ["Test/*"],
         }
     },
-    "include": ["Src", "Test", "Gulpfile.ts"],
+    "include": ["Src", "Test", "Gulpfile.ts", "check-node.js"],
     "exclude": ["node_modules"]
 }

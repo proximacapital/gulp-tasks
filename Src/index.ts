@@ -1,4 +1,3 @@
-export { CheckNode } from "@Tasks/CheckNode";
 export { Build, BuildTest, BuildCheckTest } from "@Tasks/Build";
 export { Coverage } from "@Tasks/Coverage";
 export { Demo } from "@Tasks/Demo";
