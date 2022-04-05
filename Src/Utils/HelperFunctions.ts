@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-console */
 import * as cp from "child_process";
 import * as fs from "fs";
@@ -22,7 +23,7 @@ export const SpawnTask = (command: string, done: gulp.TaskFunctionCallback, args
     }
 
     let lError: Error | null = null;
-    lCP.on("error", (error: Error) => lError = error);
+    lCP.on("error", (error: Error) => { lError = error; });
 
     // catch non-zero exit statuses so that CI can understand when task fails
     lCP.on("close", (code: number) =>
@@ -40,6 +41,19 @@ export const SpawnTask = (command: string, done: gulp.TaskFunctionCallback, args
             done();
         }
     });
+};
+
+export const SpawnTaskSync = (command: string, done: gulp.TaskFunctionCallback, args: string[] | undefined): void =>
+{
+    try
+    {
+        cp.spawnSync(command, args ?? [], { stdio: "inherit" });
+        done();
+    }
+    catch (error: any)
+    {
+        done(error);
+    }
 };
 
 export const ExecTask = (command: string, done: gulp.TaskFunctionCallback): void =>
