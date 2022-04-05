@@ -1,1 +1,2 @@
-v16.6.1
+# don't include v in the version (so v16.9 -> 16.9)
+16.6.1
