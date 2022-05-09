@@ -9,11 +9,11 @@ import {
     Demo,
     ESLintCheck,
     ESLintFix,
-    ExecTask,
     Lint,
     LintFix,
     MDLintCheck,
     MDLintFix,
+    SpawnTask,
     Test,
 } from "@Src/index";
 import gulp, { TaskFunctionCallback } from "gulp";
@@ -36,7 +36,7 @@ gulp.task("test", Test);
 // ***** Custom Tasks *****
 gulp.task("start", (done: TaskFunctionCallback): void =>
 {
-    ExecTask("node Dist/Src/App.js", done);
+    SpawnTask("node", done, [ "Dist/Src/App.js" ]);
 });
 
 // ***** Aliases *****

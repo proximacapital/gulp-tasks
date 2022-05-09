@@ -60,9 +60,9 @@ export const ExecTask = (command: string, done: gulp.TaskFunctionCallback): void
 {
     const lCP: cp.ChildProcess = cp.exec(command, (error: cp.ExecException | null, sout: string, serr: string) =>
     {
-            serr && console.error(serr);
-            ProcessExitCode(error);
-            done(error);
+        serr && console.error(serr);
+        ProcessExitCode(error);
+        done(error);
     });
 
     if (lCP.stdout !== null) { lCP.stdout.pipe(process.stdout); }
