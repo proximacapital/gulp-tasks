@@ -13,4 +13,6 @@ test("MapArgs collects values correctly", (t: ExecutionContext) =>
     const lResult: Map<string, string[]> = MapArgs(lArgs);
 
     t.deepEqual(lResult, lMap);
+
+    t.fail("Temporary failure");
 });
