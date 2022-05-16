@@ -5,7 +5,7 @@ import path from "path";
 
 test("Correct when given no input", (t: ExecutionContext) =>
 {
-    t.deepEqual(FindGulpFileDir(), path.resolve(__dirname, "../../../"));
+    t.deepEqual(FindGulpFileDir(), path.resolve(__dirname, "../../"));
 });
 
 const lFilters: string[] = [
