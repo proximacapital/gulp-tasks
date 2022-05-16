@@ -22,8 +22,6 @@ It turns out, there's no need to write our Gulpfile's in `js` -- properly
 configuring `ts-node` and `tsconfig-paths` allows for Gulp to transpile
 `Gulpfile.ts` with zero issues.
 
-This repo also demonstrates the use of `Mocha` & `Chai`.
-
 ## Contributing
 
 NPM releases are published automatically via a github workflow (read: whenever

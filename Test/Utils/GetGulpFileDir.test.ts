@@ -1,13 +1,11 @@
 import { FindGulpFileDir } from "@Src/Utils/Paths";
-import { expect } from "chai";
+import test, { ExecutionContext } from "ava";
 import fs from "fs";
 import path from "path";
 
-suite("GetGulpFileDir");
-
-test("Correct when given no input", function()
+test("Correct when given no input", (t: ExecutionContext) =>
 {
-    expect(FindGulpFileDir()).to.eq(path.resolve(__dirname, "../../"));
+    t.deepEqual(FindGulpFileDir(), path.resolve(__dirname, "../../../"));
 });
 
 const lFilters: string[] = [
@@ -17,7 +15,7 @@ const lFilters: string[] = [
 
 function TestFileFilter(aFileName: string): void
 {
-    test(`${aFileName} triggers end of crawl`, function()
+    test(`${aFileName} triggers end of crawl`, (t: ExecutionContext) =>
     {
         // arrange
         const lGulpFile: string = path.resolve(__dirname, `../${aFileName}`);
@@ -27,7 +25,7 @@ function TestFileFilter(aFileName: string): void
         const lResult: string = FindGulpFileDir(__dirname);
 
         // assert
-        expect(lResult).to.eq(path.dirname(lGulpFile));
+        t.deepEqual(lResult, path.dirname(lGulpFile));
         fs.rmSync(lGulpFile);
     });
 }
