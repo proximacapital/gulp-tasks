@@ -35,6 +35,8 @@ export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
     }
 
     lArgs.push("--verbose");
+    lArgs.push("-T");
+    lArgs.push("300s");
 
     SpawnTask(AVA, done, lArgs);
 };
