@@ -1,10 +1,19 @@
 /* eslint-disable no-console */
-import { GetAllTestFiles, RootPath, SpawnTask } from "@Src/Utils/HelperFunctions";
+import { SpawnTask } from "@Src/Utils/HelperFunctions";
 import { AVA, C8 } from "@Src/Utils/Paths";
 import { TaskFunction, TaskFunctionCallback } from "gulp";
 
-const lC8Args: string[] = ["--reporter=lcov", "--reporter=html", "--reporter=text-summary"];
-const lArgs: string[] = [...lC8Args, AVA, GetAllTestFiles(RootPath("Test"), "test.ts").join(" ")];
+const lArgs: string[] = [
+    "--reporter=lcov", "--reporter=html", "--reporter=text-summary",
+    AVA,
+    "--verbose",
+    "-T", "300s",
+    "Dist/Test/**/*.test.js",
+];
+
+//     "Dist/Test/**/*.test.js",
+// GetAllTestFiles(DistPath("Test"), "test.ts").join(" "),
+// GetAllTestFiles(RootPath("Test"), "test.ts").join(" "),
 
 export const Coverage: TaskFunction = (done: TaskFunctionCallback): void =>
 {

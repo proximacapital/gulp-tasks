@@ -38,5 +38,7 @@ export const Test: TaskFunction = (done: TaskFunctionCallback): void =>
     lArgs.push("-T");
     lArgs.push("300s");
 
+    // eslint-disable-next-line no-console
+    console.log(["spawn", AVA, ...lArgs].join(" "));
     SpawnTask(AVA, done, lArgs);
 };
