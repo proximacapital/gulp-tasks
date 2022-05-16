@@ -11,10 +11,6 @@ const lArgs: string[] = [
     "Dist/Test/**/*.test.js",
 ];
 
-//     "Dist/Test/**/*.test.js",
-// GetAllTestFiles(DistPath("Test"), "test.ts").join(" "),
-// GetAllTestFiles(RootPath("Test"), "test.ts").join(" "),
-
 export const Coverage: TaskFunction = (done: TaskFunctionCallback): void =>
 {
     console.log(["spawn", C8, ...lArgs].join(" "));
