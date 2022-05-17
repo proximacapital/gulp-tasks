@@ -33,3 +33,4 @@ export const TSC: string    = path.join(NODE_BIN_DIR, "ttsc");
 export const ESLINT: string = path.join(NODE_BIN_DIR, "eslint");
 export const MDLINT: string = path.join(NODE_BIN_DIR, "markdownlint");
 export const C8: string     = path.join(NODE_BIN_DIR, "c8");
+// export const NYC: string    = `node ./node_modules/nyc/bin/nyc.js`;

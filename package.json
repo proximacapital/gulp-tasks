@@ -37,18 +37,29 @@
       "ts-node/register"
     ]
   },
-  "mocha": {
-    "ui": "qunit",
-    "spec": [
-      "./Test/**/*.spec.ts"
+  "c8": {
+    "check-coverage": false,
+    "all": true,
+    "include": [
+      "**/*.ts"
     ],
-    "require": [
-      "ts-node/register"
+    "exclude": [
+      "coverage/**",
+      "node_modules/**",
+      "Dist/**",
+      "**/*.test.ts",
+      "**/*.demo.ts",
+      "**/*.perf.ts",
+      "**/*.network.ts",
+      "**/*.data.ts"
     ],
-    "extension": [
-      "ts"
+    "reporter": [
+      "html",
+      "lcov",
+      "text",
+      "text-summary"
     ]
-  },
+  },  
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/proximacapital/gulp-tasks.git"
