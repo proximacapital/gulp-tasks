@@ -1,52 +1,45 @@
 import { GetAllTestFiles, GetMatchingFiles, MapArgs } from "@Src/Utils/HelperFunctions";
 import { TEST_DIST_DIR } from "@Src/Utils/Paths";
-import { expect } from "chai";
+import test, { ExecutionContext } from "ava";
 import * as path from "path";
 
-suite("GetAllTestFiles");
-
-test("correctly filters specified files", function()
+test("Correctly filters specified files", (t: ExecutionContext) =>
 {
     const lActual: string[] = GetAllTestFiles(TEST_DIST_DIR).sort();
     const lExpected: string[] = [
-        "Utils/MapArgs.test.js",
+        "Utils/GetGulpFileDir.test.js",
+        "Utils/HelperFunctions.test.js",
     ]
         .map((aPath: string) => path.join(TEST_DIST_DIR, aPath))
         .sort();
 
-    expect(lActual).to.eql(lExpected);
+    t.deepEqual(lActual, lExpected);
 });
 
-test("gets all files when given an empty filter", function()
+test("Gets all files when given an empty filter", (t: ExecutionContext) =>
 {
     const lActual: string[] = GetAllTestFiles(TEST_DIST_DIR, ".$").sort();
     const lExpected: string[] = [
         "TestFile.demo.d.ts",
         "TestFile.demo.js",
-        "Utils/GetGulpFileDir.spec.d.ts",
-        "Utils/GetGulpFileDir.spec.js",
-        "Utils/HelperFunctions.spec.d.ts",
-        "Utils/HelperFunctions.spec.js",
-        "Utils/MapArgs.test.d.ts",
-        "Utils/MapArgs.test.js",
+        "Utils/GetGulpFileDir.test.d.ts",
+        "Utils/GetGulpFileDir.test.js",
+        "Utils/HelperFunctions.test.d.ts",
+        "Utils/HelperFunctions.test.js",
     ]
         .map((aPath: string) => path.join(TEST_DIST_DIR, aPath))
         .sort();
-    expect(lActual).to.eql(lExpected);
+    t.deepEqual(lActual, lExpected);
 });
 
-suite("GetMatchingFiles");
-
-test("finds demo file", function()
+test("Finds demo file", (t: ExecutionContext) =>
 {
     const lActual: string[] = GetMatchingFiles(["TestFile"], "demo");
     const lExpected: string[] = [path.join(TEST_DIST_DIR, "TestFile.demo.js")];
-    expect(lActual).to.eql(lExpected);
+    t.deepEqual(lActual, lExpected);
 });
 
-suite("MapArgs");
-
-test("collects values from the same key", function()
+test("MapArgs collects values correctly", (t: ExecutionContext) =>
 {
     const lArgs: string[] = ["--files", "file1", "file2", "-p", "1", "-v"];
     const lMap: Map<string, string[]> = new Map([
@@ -57,5 +50,5 @@ test("collects values from the same key", function()
 
     const lResult: Map<string, string[]> = MapArgs(lArgs);
 
-    expect(lResult).to.eql(lMap);
+    t.deepEqual(lResult, lMap);
 });
