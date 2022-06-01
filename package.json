@@ -78,7 +78,7 @@
     "markdownlint-cli": "^0.31.1"
   },
   "devDependencies": {
-    "@proxima-oss/eslint-config": "6.0.0",
+    "@proxima-oss/eslint-config": "6.0.1",
     "@types/gulp": "4.0.9",
     "ts-node": "10.7.0",
     "tsconfig-paths": "3.14.1",
